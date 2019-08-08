@@ -18,5 +18,8 @@ namespace System.Hooks
 
         [DllImport (DLL_NAME, BestFitMapping = false, CharSet = CharSet.Auto, SetLastError = true)]
         public static extern IntPtr GetModuleHandle (string moduleName);
+
+        [DllImport (DLL_NAME, EntryPoint = "CloseHandle")]
+        public static extern bool CloseHandle (IntPtr handle);
     }
 }

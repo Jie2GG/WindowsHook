@@ -97,6 +97,9 @@ namespace System.Hooks
                 }
                 else
                 {
+                    // 释放掉指针
+                    Kernel32.CloseHandle (this._hhook);
+
                     // TODO: 引发异常
                     throw new HookUnInstallException ();
                 }
@@ -123,7 +126,7 @@ namespace System.Hooks
             if (_isDispose == false)
             {
                 this.UnInstall ();
-                GC.CancelFullGCNotification (); // 取消垃圾回收
+                GC.SuppressFinalize (this);
                 this._isDispose = true;
             }
         }
